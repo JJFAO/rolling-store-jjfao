@@ -6,7 +6,7 @@ const { Header, Content, Footer } = Layout;
 const { Search } = Input;
 
 
-export default class Main extends Component {
+export default class Results extends Component {
     state= {
         redirect: false
     }
@@ -51,7 +51,7 @@ export default class Main extends Component {
                     </Row>
                 </Header>
                 <Content className="content">
-                    <p> Basado en tu última visita</p>
+                    <p> Resultados </p>
                     <Row>
                     { products.map( prod => (
                         <Col xs={{ span: 24 }} lg={{ span: 8 }}>

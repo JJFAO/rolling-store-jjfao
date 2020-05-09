@@ -1,8 +1,10 @@
 // import logo from './rollingstore.png';
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import './App.css';
 import 'antd/dist/antd.css';
 import Main from './components/Main';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Results from './components/Results';
 
 
 export default class App extends Component {
@@ -22,7 +24,7 @@ export default class App extends Component {
           name: 'zapatilla',
           brand: 'Nike',
           price: 3500
-        },        {
+        }, {
           id: 'prod03',
           name: 'juego de ps4',
           brand: 'Dark Souls',
@@ -33,15 +35,24 @@ export default class App extends Component {
   }
 
   render() {
-    const {userName, products} = this.state;
+    const { userName, products } = this.state;
 
 
     return (
-      <div className="App">
-        <header className="App-container">
-          <Main userName={userName} products={products}/>
-        </header>
-      </div>
+      <Router>
+        <Switch>
+          <Route path="/" exact>
+            <div className="App-container">
+              <Main userName={userName} products={products} />
+            </div>
+          </Route>
+          <Route path="/results">
+            <div className="App-container">
+              <Results userName={userName} products={products} />
+            </div>
+          </Route>
+        </Switch>
+      </Router>
     )
   }
 }
