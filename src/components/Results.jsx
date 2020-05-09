@@ -7,23 +7,25 @@ const { Search } = Input;
 
 
 export default class Results extends Component {
-    state= {
-        redirect: false
+    constructor(props) {
+        super(props);
+        this.state = {
+            redirect: false
+        }
     }
 
     setRedirect = () => {
-        this.setState({redirect: true})
-        console.log('asd');
-        
+        this.setState({ redirect: true })
     }
 
     renderRedirect = () => {
         if (this.state.redirect) {
-            return <Redirect to='results'></Redirect>
+            return <Redirect to='/'></Redirect>
         }
     }
 
     render() {
+        
         const { userName, products } = this.props;
         return (
             <Layout>
@@ -31,14 +33,14 @@ export default class Results extends Component {
                 <Header className="header">
                     <Row>
                         <Col xs={{ span: 5 }} lg={{ span: 3 }}>
-                            <img src="/rollingstore.png" className="header-logo" alt="logo" />
+                            <img src="/rollingstore.png" className="header-logo" alt="logo" onClick={this.setRedirect} />
                         </Col>
                         <Col xs={{ span: 19 }} lg={{ span: 16 }}>
                             <div className="header-search">
                                 {  }
                                 <Search
                                     placeholder="¿Qué querés comprar?"
-                                    onSearch={ this.setRedirect }
+                                    onSearch={ value => console.log(value) }
                                     enterButton
                                 />
                             </div>

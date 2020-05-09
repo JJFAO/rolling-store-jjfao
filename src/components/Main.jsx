@@ -7,14 +7,15 @@ const { Search } = Input;
 
 
 export default class Main extends Component {
-    state= {
-        redirect: false
+    constructor(props) {
+        super(props);
+        this.state = {
+            redirect: false
+        }
     }
 
     setRedirect = () => {
-        this.setState({redirect: true})
-        console.log('asd');
-        
+        this.setState({ redirect: true })
     }
 
     renderRedirect = () => {
@@ -23,11 +24,16 @@ export default class Main extends Component {
         }
     }
 
+    handleChange = (e) => {
+        let term = e.target.value;
+        this.props.updateTerm(term)
+    }
+
     render() {
         const { userName, products } = this.props;
         return (
             <Layout>
-            { this.renderRedirect() }
+                {this.renderRedirect()}
                 <Header className="header">
                     <Row>
                         <Col xs={{ span: 5 }} lg={{ span: 3 }}>
@@ -35,17 +41,18 @@ export default class Main extends Component {
                         </Col>
                         <Col xs={{ span: 19 }} lg={{ span: 16 }}>
                             <div className="header-search">
-                                {  }
+                                {}
                                 <Search
                                     placeholder="¿Qué querés comprar?"
-                                    onSearch={ this.setRedirect }
+                                    onSearch={this.setRedirect}
+                                    onChange={this.handleChange}
                                     enterButton
                                 />
                             </div>
                         </Col>
                         <Col xs={{ span: 0 }} lg={{ span: 5 }}>
                             <div className="header-greetings">
-                            Bienvenido {userName}
+                                Bienvenido {userName}
                             </div>
                         </Col>
                     </Row>
@@ -53,11 +60,11 @@ export default class Main extends Component {
                 <Content className="content">
                     <p> Basado en tu última visita</p>
                     <Row>
-                    { products.map( prod => (
-                        <Col xs={{ span: 24 }} lg={{ span: 8 }}>
-                            <ProductCard product={prod} />
-                        </Col>
-                    ))}
+                        {products.map(prod => (
+                            <Col xs={{ span: 24 }} lg={{ span: 8 }}>
+                                <ProductCard product={prod} />
+                            </Col>
+                        ))}
                     </Row>
                 </Content>
                 <Footer className="footer">

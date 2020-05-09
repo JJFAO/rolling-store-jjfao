@@ -30,20 +30,43 @@ export default class App extends Component {
           brand: 'Dark Souls',
           price: 2000
         }
-      ]
+      ],
+      results: [],
+      term: ''
     }
   }
 
-  render() {
-    const { userName, products } = this.state;
+  updateTerm(term) {
+    this.setState({ term })
+  }
 
+  updateList(newList, term) {
+    const { products } = this.state;
+    term !== '' ?
+    this.setState({
+      results: newList,
+      term
+    }) :
+    this.setState({results: products})
+  }
+
+  render() {
+    const { userName, products, term, results } = this.state;
+    const updateTerm = this.updateTerm.bind(this);
+    const updateList = this.updateList.bind(this);
 
     return (
       <Router>
         <Switch>
           <Route path="/" exact>
             <div className="App-container">
-              <Main userName={userName} products={products} />
+              <Main
+                userName={userName}
+                products={products}
+                updateTerm={updateTerm}
+                term={term}
+                updateList={updateList}
+              />
             </div>
           </Route>
           <Route path="/results">
