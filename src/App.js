@@ -40,14 +40,10 @@ export default class App extends Component {
     this.setState({ term })
   }
 
-  updateList(newList, term) {
-    const { products } = this.state;
-    term !== '' ?
+  updateList(results) {
     this.setState({
-      results: newList,
-      term
-    }) :
-    this.setState({results: products})
+      results
+    })
   }
 
   render() {

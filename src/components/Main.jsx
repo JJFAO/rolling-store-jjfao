@@ -40,10 +40,10 @@ export default class Main extends Component {
                 const filter = term.toLowerCase();
                 return lc.includes(filter)
             })
-            this.props.updateList(newProducts, term);
         } else {
             newProducts = this.props.products
         }
+        this.props.updateList(newProducts);
         this.setRedirect();        
     } 
 
