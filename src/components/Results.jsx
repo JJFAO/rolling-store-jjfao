@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Layout, Input, Row, Col } from "antd";
+import { Layout, Input, Row, Col, Space } from "antd";
 import ProductCard from './ProductCard';
 import { Redirect } from 'react-router-dom';
 const { Header, Content, Footer } = Layout;
@@ -24,12 +24,35 @@ export default class Results extends Component {
         }
     }
 
+    handleChange = (e) => {
+        let term = e.target.value;
+        this.props.updateTerm(term)
+    }
+
+    handleSearch = (term) => {
+        let currentProducts = [];
+        let newProducts = [];
+
+        if (term !== '') {
+            currentProducts = this.props.products;
+            newProducts = currentProducts.filter(item => {
+                const lc = item.name.toLowerCase();
+                const filter = term.toLowerCase();
+                return lc.includes(filter);
+            })
+            this.props.updateList(newProducts, term);
+        } else {
+            newProducts = this.props.products;
+            this.props.updateList(newProducts, term);
+        }
+    }
+
     render() {
-        
-        const { userName, products } = this.props;
+
+        const { userName, results } = this.props;
         return (
             <Layout>
-            { this.renderRedirect() }
+                {this.renderRedirect()}
                 <Header className="header">
                     <Row>
                         <Col xs={{ span: 5 }} lg={{ span: 3 }}>
@@ -37,29 +60,30 @@ export default class Results extends Component {
                         </Col>
                         <Col xs={{ span: 19 }} lg={{ span: 16 }}>
                             <div className="header-search">
-                                {  }
+                                {}
                                 <Search
                                     placeholder="¿Qué querés comprar?"
-                                    onSearch={ value => console.log(value) }
+                                    onSearch={this.handleSearch}
+                                    onChange={this.handleChange}
                                     enterButton
                                 />
                             </div>
                         </Col>
                         <Col xs={{ span: 0 }} lg={{ span: 5 }}>
                             <div className="header-greetings">
-                            Bienvenido {userName}
+                                Bienvenido {userName}
                             </div>
                         </Col>
                     </Row>
                 </Header>
                 <Content className="content">
                     <p> Resultados </p>
-                    <Row>
-                    { products.map( prod => (
-                        <Col xs={{ span: 24 }} lg={{ span: 8 }}>
-                            <ProductCard product={prod} />
-                        </Col>
-                    ))}
+                    <Row justify="center">
+                        {results.map(prod => (
+                            <Col xs={{ span: 24 }} sm={{ span: 12 }} lg={{ span: 8 }} xl={{ span: 6 }} key={prod.name}>
+                                <ProductCard product={prod} />
+                            </Col>
+                        ))}
                     </Row>
                 </Content>
                 <Footer className="footer">

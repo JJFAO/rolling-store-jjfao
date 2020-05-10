@@ -71,7 +71,13 @@ export default class App extends Component {
           </Route>
           <Route path="/results">
             <div className="App-container">
-              <Results userName={userName} products={products} />
+              <Results
+                userName={userName}
+                products={products}
+                results={results}
+                updateTerm={updateTerm}
+                updateList={updateList}
+              />
             </div>
           </Route>
         </Switch>

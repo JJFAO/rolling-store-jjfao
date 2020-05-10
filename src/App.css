@@ -64,10 +64,11 @@
 
 .content {
   background-color: var(--background);
-  display: flex;
+  text-align: center;
+  /* display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
 }
 
 .footer {

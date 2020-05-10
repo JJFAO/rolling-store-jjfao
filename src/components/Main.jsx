@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Layout, Input, Row, Col } from "antd";
+import { Layout, Input, Row, Col, Space } from "antd";
 import ProductCard from './ProductCard';
 import { Redirect } from 'react-router-dom';
 const { Header, Content, Footer } = Layout;
@@ -29,6 +29,24 @@ export default class Main extends Component {
         this.props.updateTerm(term)
     }
 
+    handleSearch = (term) => {
+        let currentProducts = [];
+        let newProducts = [];
+
+        if (term !== '') {
+            currentProducts = this.props.products;
+            newProducts = currentProducts.filter( item => {
+                const lc = item.name.toLowerCase();
+                const filter = term.toLowerCase();
+                return lc.includes(filter)
+            })
+            this.props.updateList(newProducts, term);
+        } else {
+            newProducts = this.props.products
+        }
+        this.setRedirect();        
+    } 
+
     render() {
         const { userName, products } = this.props;
         return (
@@ -44,7 +62,7 @@ export default class Main extends Component {
                                 {}
                                 <Search
                                     placeholder="¿Qué querés comprar?"
-                                    onSearch={this.setRedirect}
+                                    onSearch={this.handleSearch}
                                     onChange={this.handleChange}
                                     enterButton
                                 />
@@ -58,14 +76,15 @@ export default class Main extends Component {
                     </Row>
                 </Header>
                 <Content className="content">
-                    <p> Basado en tu última visita</p>
-                    <Row>
+                    <p> Basado en tu última visita </p>
+                    <Row justify="center">
                         {products.map(prod => (
-                            <Col xs={{ span: 24 }} lg={{ span: 8 }}>
+                            <Col xs={{ span: 24 }} sm={{ span: 12 }} lg={{ span: 8 }} xl={{ span: 6 }} key={prod.name} >
                                 <ProductCard product={prod} />
                             </Col>
                         ))}
                     </Row>
+
                 </Content>
                 <Footer className="footer">
                     Footer
