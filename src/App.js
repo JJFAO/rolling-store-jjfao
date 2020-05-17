@@ -6,6 +6,7 @@ import Main from './components/Main';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Results from './components/Results';
 import { firebaseApp } from "./utils/firebase";
+import TheHeader from './components/TheHeader';
 
 
 export default class App extends Component {
@@ -53,6 +54,7 @@ export default class App extends Component {
 
     return (
       <Router>
+        <TheHeader />
         <Switch>
           <Route path="/" exact>
             <div className="App-container">
