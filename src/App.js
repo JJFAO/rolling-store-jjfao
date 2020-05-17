@@ -5,6 +5,7 @@ import 'antd/dist/antd.css';
 import Main from './components/Main';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Results from './components/Results';
+import { firebaseApp } from "./utils/firebase";
 
 
 export default class App extends Component {
@@ -12,28 +13,36 @@ export default class App extends Component {
     super(props);
     this.state = {
       userName: 'JJ',
-      products: [
-        {
-          id: 'prod01',
-          name: 'notebook',
-          brand: 'Asus',
-          price: 15000
-        },
-        {
-          id: 'prod02',
-          name: 'zapatilla',
-          brand: 'Nike',
-          price: 3500
-        }, {
-          id: 'prod03',
-          name: 'juego de ps4',
-          brand: 'Dark Souls',
-          price: 2000
-        }
-      ],
+      products: [],
       results: [],
       term: ''
     }
+    this.productsRef = firebaseApp.database().ref().child('products');
+  }
+
+  componentDidMount() {
+    this.listenForProducts(this.productsRef);
+  }
+
+  listenForProducts(productsRef) {
+    // firebaseApp.database().ref().on('value', snap => {
+    //   snap.forEach(child => {
+        
+    //   });
+    // });
+    productsRef.on('value', snap => {
+    console.log("App -> listenForProducts -> snap", snap)
+      let products = [];
+      snap.forEach(child => {
+        products.push({
+          name: child.val().name,
+          brand: child.val().brand,
+          price: child.val().price,
+          id: child.val().id
+        });
+      });
+      this.setState({ products });
+    });
   }
 
   updateTerm(term) {
