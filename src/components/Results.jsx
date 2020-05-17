@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Layout, Input, Row, Col, Space } from "antd";
+import { Layout, Input, Row, Col } from "antd";
 import ProductCard from './ProductCard';
 import { Redirect } from 'react-router-dom';
 const { Header, Content, Footer } = Layout;

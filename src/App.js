@@ -25,21 +25,12 @@ export default class App extends Component {
   }
 
   listenForProducts(productsRef) {
-    // firebaseApp.database().ref().on('value', snap => {
-    //   snap.forEach(child => {
-        
-    //   });
-    // });
     productsRef.on('value', snap => {
-    console.log("App -> listenForProducts -> snap", snap)
       let products = [];
       snap.forEach(child => {
-        products.push({
-          name: child.val().name,
-          brand: child.val().brand,
-          price: child.val().price,
-          id: child.val().id
-        });
+        // const { id, name, price, brand } = child.val();
+        const prod = child.val();
+        products.push( prod );
       });
       this.setState({ products });
     });

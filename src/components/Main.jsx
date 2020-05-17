@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Layout, Input, Row, Col, Space } from "antd";
+import { Layout, Input, Row, Col } from "antd";
 import ProductCard from './ProductCard';
 import { Redirect } from 'react-router-dom';
 const { Header, Content, Footer } = Layout;
@@ -49,6 +49,7 @@ export default class Main extends Component {
 
     render() {
         const { userName, products } = this.props;
+        
         return (
             <Layout>
                 {this.renderRedirect()}
@@ -58,8 +59,7 @@ export default class Main extends Component {
                             <img src="/rollingstore.png" className="header-logo" alt="logo" />
                         </Col>
                         <Col xs={{ span: 19 }} lg={{ span: 16 }}>
-                            <div className="header-search">
-                                {}
+                            <div  className="header-search">
                                 <Search
                                     placeholder="¿Qué querés comprar?"
                                     onSearch={this.handleSearch}
@@ -79,7 +79,7 @@ export default class Main extends Component {
                     <p> Basado en tu última visita </p>
                     <Row justify="center">
                         {products.map(prod => (
-                            <Col xs={{ span: 24 }} sm={{ span: 12 }} lg={{ span: 8 }} xl={{ span: 6 }} key={prod.name} >
+                            <Col key={prod.id} xs={{ span: 24 }} sm={{ span: 12 }} lg={{ span: 8 }} xl={{ span: 6 }} >
                                 <ProductCard product={prod} />
                             </Col>
                         ))}
