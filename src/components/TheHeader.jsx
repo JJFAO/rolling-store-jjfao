@@ -24,6 +24,10 @@ class TheHeader extends React.Component {
     //   this.updateTerm(term)
     // }
 
+    // setRedirect = () => {
+    //   this.setState({ redirect: true })
+    // }
+
     handleSearch = (term) => {
         const currentProducts = this.props.products;
         let newProducts = [];
@@ -41,11 +45,6 @@ class TheHeader extends React.Component {
         this.props.history.push('/results');
         // this.setRedirect();
     }
-
-    // setRedirect = () => {
-    //   this.setState({ redirect: true })
-    // }
-
 
     render() {
         const { userName } = this.props;

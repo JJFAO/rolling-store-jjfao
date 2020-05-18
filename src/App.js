@@ -2,11 +2,14 @@
 import React, { Component } from 'react';
 import './App.css';
 import 'antd/dist/antd.css';
-import Main from './components/Main';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Results from './components/Results';
+import { Layout } from 'antd';
 import { firebaseApp } from "./utils/firebase";
+import Main from './components/Main';
+import Results from './components/Results';
 import TheHeader from './components/TheHeader';
+import TheFooter from './components/TheFooter';
+const { Content } = Layout;
 
 
 export default class App extends Component {
@@ -45,36 +48,31 @@ export default class App extends Component {
         const updateList = this.updateList.bind(this);
 
         return (
-            <>
             <Router>
-
-                <TheHeader
-                    userName={userName}
-                    updateList={updateList}
-                    products={products}
-                />
-
                 <div className="App-container">
-                    <Switch>
+                    <Layout>
 
-                        <Route path="/" exact>
-                            <Main
-                                products={products}
-                            />
-                        </Route>
+                        <TheHeader userName={userName} updateList={updateList} products={products} />
 
-                        <Route path="/results">
-                            <Results
-                                products={products}
-                                results={results}
-                            />
-                        </Route>
+                        <Content className="content">
+                            <Switch>
 
-                    </Switch>
+                                <Route path="/" exact>
+                                    <Main products={products} />
+                                </Route>
+
+                                <Route path="/results">
+                                    <Results products={products} results={results} />
+                                </Route>
+
+                            </Switch>
+                        </Content>
+
+                        <TheFooter/>
+
+                    </Layout>
                 </div>
-
             </Router>
-            </>
         )
     }
 }
