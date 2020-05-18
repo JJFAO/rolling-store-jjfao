@@ -11,8 +11,7 @@ export default class ProductCard extends Component {
         return (
             <div className="product-card">
                 <div style={{height: '400px', overflow: 'hidden', display: 'flex', alignItems: 'center', background: 'white' }}>
-                    <img src={this.getUrl(id)} alt=""
-                    style={{width: '100%'}} />
+                    <img src={this.getUrl(id)} alt="" style={{width: '100%'}} />
                 </div>
                 <div>producto: {name}</div>
                 <div>marca: {brand}</div>
