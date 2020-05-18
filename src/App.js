@@ -1,7 +1,7 @@
 // import logo from './rollingstore.png';
 import React, { Component } from 'react';
-import './App.css';
 import 'antd/dist/antd.css';
+import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Layout } from 'antd';
 import { firebaseApp } from "./utils/firebase";
