@@ -1,6 +1,6 @@
 import React from 'react'
 import { Layout, Row, Col, Input } from "antd";
-import { withRouter, /* Redirect */ } from 'react-router-dom';
+import { withRouter, Link, /* Redirect */ } from 'react-router-dom';
 const { Header } = Layout;
 const { Search } = Input;
 
@@ -29,20 +29,17 @@ class TheHeader extends React.Component {
     // }
 
     handleSearch = (term) => {
-        const currentProducts = this.props.products;
-        let newProducts = [];
-
-        if (term !== '') {
-            newProducts = currentProducts.filter(({ name }) => {
-                const lc = name.toLowerCase();
-                const filter = term.toLowerCase();
-                return lc.includes(filter);
-            })
+        const { pathname } = this.props.location;
+        const { history } = this.props;
+        
+        if (!term) {
+            history.replace('/')
+        } else if (pathname.includes('results')) {
+            history.replace('/results/' + term)
         } else {
-            newProducts = currentProducts;
+            history.push('/results/' + term);
         }
-        this.props.updateList(newProducts);
-        this.props.history.push('/results');
+
         // this.setRedirect();
     }
 
@@ -58,7 +55,9 @@ class TheHeader extends React.Component {
                 <Row>
 
                     <Col xs={{ span: 5 }} lg={{ span: 3 }}>
-                        <img src="/rollingstore.png" className="header-logo" alt="logo" />
+                        <Link to="/" >
+                            <img src="/rollingstore.png" className="header-logo" alt="logo" />
+                        </Link>
                     </Col>
 
                     <Col xs={{ span: 19 }} lg={{ span: 16 }}>
@@ -67,6 +66,7 @@ class TheHeader extends React.Component {
                                 placeholder="¿Qué querés comprar?"
                                 onSearch={this.handleSearch}
                                 enterButton
+                                maxLength="30"
                             />
                         </div>
                     </Col>

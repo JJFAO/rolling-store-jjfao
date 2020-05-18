@@ -42,20 +42,15 @@ export default class App extends Component {
         });
     }
 
-    updateList(results) {
-        this.setState({ results })
-    }
-
     render() {
-        const { userName, products, results } = this.state;
-        const updateList = this.updateList.bind(this);
+        const { userName, products } = this.state;
 
         return (
             <Router>
                 <div className="App-container">
                     <Layout>
 
-                        <TheHeader userName={userName} updateList={updateList} products={products} />
+                        <TheHeader userName={userName}/>
 
                         <Content className="content">
                             <Switch>
@@ -64,8 +59,8 @@ export default class App extends Component {
                                     <Main products={products} />
                                 </Route>
 
-                                <Route path="/results">
-                                    <Results products={products} results={results} />
+                                <Route path="/results/:term" >
+                                    <Results products={products} />
                                 </Route>
 
                                 <Route path="/product/:id" >
