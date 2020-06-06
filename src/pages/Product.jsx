@@ -30,7 +30,7 @@ class Product extends Component {
         const src = this.getUrl(id);
         return (
             <div>
-                <p style={{color: '#1d4cb9'}}> Información del producto id: {id} </p>
+                <p className="title" style={{color: '#1d4cb9'}}> Información del producto id: {id} </p>
 
                 <Row className="productInfo">
                     <Col xs={{ span: 24 }} lg={{ span: 12 }}>

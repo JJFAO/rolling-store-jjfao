@@ -10,7 +10,7 @@ export default class Main extends Component {
 
         return (
             <>
-                <p> Basado en tu última visita </p>
+                <p className="title"> Basado en tu última visita </p>
 
                 <Row justify="center">
                     {products.map(prod => (

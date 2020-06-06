@@ -22,6 +22,11 @@ export default class App extends Component {
             userName: 'JJ',
             products: [],
             results: [],
+            cart: {
+                productToBuy: {},
+                creditCard: '',
+                shippingAddress: ''
+              },
         }
         this.productsRef = firebaseApp.database().ref().child('products');
     }
@@ -42,8 +47,20 @@ export default class App extends Component {
         });
     }
 
+    updateCart(prod, creditCard = '', shippingAddress = '') {
+        this.setState({
+          cart: {
+              productToBuy: { ...prod },
+              creditCard,
+              shippingAddress
+            }
+        })
+        console.log("App -> updateCart -> cart", prod, creditCard, shippingAddress)
+      }
+
     render() {
         const { userName, products } = this.state;
+        const updateCart = this.updateCart.bind(this);
 
         return (
             <Router>
@@ -63,13 +80,9 @@ export default class App extends Component {
                                     <Results products={products} />
                                 </Route>
 
-                                <Route path="/product/:id" component={Product} >
-                                    {/* <Product /> */}
-                                </Route>
+                                <Route path="/product/:id" component={Product} />
 
-                                <Route path="/cart" >
-                                    <Cart />
-                                </Route>
+                                <Route path="/cart" render={props => <Cart {...props} updateCart={updateCart} />} />
 
                                 <Route path="/success" >
                                     <Success />
