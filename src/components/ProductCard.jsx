@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { Button } from 'antd'
 
 export default class ProductCard extends Component {
 
@@ -10,17 +9,14 @@ export default class ProductCard extends Component {
         const { name, brand, price, id } = this.props.product
         return (
             <div className="product-card">
-                <div style={{height: '400px', overflow: 'hidden', display: 'flex', alignItems: 'center', background: 'white' }}>
-                    <img src={this.getUrl(id)} alt="" style={{width: '100%'}} />
-                </div>
-                <div>producto: {name}</div>
-                <div>marca: {brand}</div>
-                <div>precio: {price}</div>
-                <Button type="primary">
-                    <Link to={`/product/${id}`}>
-                        Ver más
-                    </Link>
-                </Button>
+                <Link to={`/product/${id}`}>
+                    <div style={{ height: '400px', overflow: 'hidden', display: 'flex', alignItems: 'center', background: 'white' }}>
+                        <img src={this.getUrl(id)} alt="" style={{ width: '100%' }} />
+                    </div>
+                    <div>producto: {name}</div>
+                    <div>marca: {brand}</div>
+                    <div>precio: {price}</div>
+                </Link>
             </div>
         )
     }

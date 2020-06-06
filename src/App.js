@@ -5,13 +5,13 @@ import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Layout } from 'antd';
 import { firebaseApp } from "./utils/firebase";
-import Main from './components/Main';
-import Results from './components/Results';
+import Main from './pages/Main';
+import Results from './pages/Results';
 import TheHeader from './components/TheHeader';
 import TheFooter from './components/TheFooter';
-import Product from './components/Product';
-import Cart from './components/Cart';
-import Success from './components/Success';
+import Product from './pages/Product';
+import Cart from './pages/Cart';
+import Success from './pages/Success';
 const { Content } = Layout;
 
 
@@ -63,8 +63,8 @@ export default class App extends Component {
                                     <Results products={products} />
                                 </Route>
 
-                                <Route path="/product/:id" >
-                                    <Product />
+                                <Route path="/product/:id" component={Product} >
+                                    {/* <Product /> */}
                                 </Route>
 
                                 <Route path="/cart" >

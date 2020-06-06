@@ -1,8 +1,9 @@
 :root {
   --background: #ab987a2c;
-  --secondary: #0f1626;
+  --secondary: #061944;
   --details: #ff543d3a;
   --text: #f5f5f5;
+  --text2: #1d4cb9;
   --test1: red;
   --test2: blue;
   --test3: yellow;
@@ -92,4 +93,12 @@
   background-color: var(--secondary);
   margin: 10px;
   padding: 15px;
+}
+
+.productInfo {
+  background-color: var(--secondary);
+  padding: 15px;
+  min-width: 600px;
+  padding: 20px;
+  margin: 0 40px;
 }

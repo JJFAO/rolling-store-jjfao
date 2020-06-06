@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Row, Col } from "antd";
-import ProductCard from './ProductCard';
+import ProductCard from '../components/ProductCard';
 import { withRouter } from 'react-router-dom';
 
 
