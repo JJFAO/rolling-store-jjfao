@@ -16,8 +16,8 @@ class Product extends Component {
         const ref = firebaseApp.database().ref().child('products');
         const { id } = this.props.match.params;
 
-        ref.orderByChild("id").equalTo(id).on("value", async (snapshot) => {
-            this.setState({ product: snapshot.toJSON()[id] });
+        ref.child(id).on("value", async (snapshot) => {
+            this.setState({ product: snapshot.toJSON() });
         });
 
     }

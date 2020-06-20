@@ -12,15 +12,17 @@ import TheFooter from './components/TheFooter';
 import Product from './pages/Product';
 import Cart from './pages/Cart';
 import Success from './pages/Success';
+import { connect } from "react-redux";
+import { getVisibleProducts } from "./reducers/products";
 const { Content } = Layout;
 
 
-export default class App extends Component {
+class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
             userName: 'JJ',
-            products: [],
+            // products: [],
             results: [],
             cart: {
                 productToBuy: {},
@@ -28,24 +30,24 @@ export default class App extends Component {
                 shippingAddress: ''
               },
         }
-        this.productsRef = firebaseApp.database().ref().child('products');
+        // this.productsRef = firebaseApp.database().ref().child('products');
     }
 
-    componentDidMount() {
-        this.listenForProducts(this.productsRef);
-    }
+    // componentDidMount() {
+    //     this.listenForProducts(this.productsRef);
+    // }
 
-    listenForProducts(productsRef) {
-        productsRef.on('value', snap => {
-            let products = [];
-            snap.forEach(child => {
-                // const { id, name, price, brand } = child.val();
-                const prod = child.val();
-                products.push(prod);
-            });
-            this.setState({ products });
-        });
-    }
+    // listenForProducts(productsRef) {
+    //     productsRef.on('value', snap => {
+    //         let products = [];
+    //         snap.forEach(child => {
+    //             // const { id, name, price, brand } = child.val();
+    //             const prod = child.val();
+    //             products.push(prod);
+    //         });
+    //         this.setState({ products });
+    //     });
+    // }
 
     updateCart(prod, creditCard = '', shippingAddress = '') {
         this.setState({
@@ -55,11 +57,12 @@ export default class App extends Component {
               shippingAddress
             }
         })
-        console.log("App -> updateCart -> cart", prod, creditCard, shippingAddress)
+        // console.log("App -> updateCart -> cart", prod, creditCard, shippingAddress)
       }
 
     render() {
-        const { userName, products } = this.state;
+        const { products } = this.props;
+        const { userName } = this.state;
         const updateCart = this.updateCart.bind(this);
 
         return (
@@ -99,3 +102,11 @@ export default class App extends Component {
         )
     }
 }
+
+const mapStateToProps = state => ({
+    products: getVisibleProducts(state.products)
+  })
+  
+  export default connect(
+    mapStateToProps
+  )(App)
